@@ -22,7 +22,23 @@ export const FinancialDashboardProvider = ({ children }) => {
   const [transactions, setTransactions] = useState(() => {
     // Load transactions from localStorage or use mock data
     const saved = localStorage.getItem('financialDashboard_transactions');
-    return saved ? JSON.parse(saved) : MOCK_TRANSACTIONS.map(t => ({
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        // Convert string dates back to Date objects
+        return parsed.map(t => ({
+          ...t,
+          date: typeof t.date === 'string' ? new Date(t.date) : t.date
+        }));
+      } catch (error) {
+        console.error("Error loading transactions from localStorage:", error);
+        return MOCK_TRANSACTIONS.map(t => ({
+          ...t,
+          date: new Date(t.date)
+        }));
+      }
+    }
+    return MOCK_TRANSACTIONS.map(t => ({
       ...t,
       date: new Date(t.date)
     }));
@@ -128,12 +144,21 @@ export const FinancialDashboardProvider = ({ children }) => {
       return false;
     }
 
+    // Ensure date is a Date object
+    let transactionDate = transaction.date;
+    if (typeof transactionDate === 'string') {
+      transactionDate = new Date(transactionDate);
+    } else if (!(transactionDate instanceof Date)) {
+      transactionDate = new Date();
+    }
+
     const newTransaction = {
       id: `transaction_${Date.now()}`,
       ...transaction,
-      date: new Date(transaction.date),
+      date: transactionDate,
     };
 
+    // Add new transaction to the front of the list (most recent first)
     setTransactions([newTransaction, ...transactions]);
     return true;
   };
@@ -146,15 +171,25 @@ export const FinancialDashboardProvider = ({ children }) => {
     }
 
     setTransactions(
-      transactions.map((t) =>
-        t.id === id
-          ? {
-              ...t,
-              ...updates,
-              date: updates.date ? new Date(updates.date) : t.date,
-            }
-          : t
-      )
+      transactions.map((t) => {
+        if (t.id !== id) return t;
+
+        // Ensure date is a Date object if being updated
+        let updatedDate = t.date;
+        if (updates.date) {
+          if (typeof updates.date === 'string') {
+            updatedDate = new Date(updates.date);
+          } else if (updates.date instanceof Date) {
+            updatedDate = updates.date;
+          }
+        }
+
+        return {
+          ...t,
+          ...updates,
+          date: updatedDate,
+        };
+      })
     );
     return true;
   };
@@ -177,11 +212,21 @@ export const FinancialDashboardProvider = ({ children }) => {
       return false;
     }
 
-    const formatted = newTransactions.map((t) => ({
-      ...t,
-      id: `transaction_${Date.now()}_${Math.random()}`,
-      date: new Date(t.date),
-    }));
+    const formatted = newTransactions.map((t) => {
+      // Ensure date is a Date object
+      let transactionDate = t.date;
+      if (typeof transactionDate === 'string') {
+        transactionDate = new Date(transactionDate);
+      } else if (!(transactionDate instanceof Date)) {
+        transactionDate = new Date();
+      }
+
+      return {
+        ...t,
+        id: `transaction_${Date.now()}_${Math.random()}`,
+        date: transactionDate,
+      };
+    });
 
     setTransactions([...formatted, ...transactions]);
     return true;
