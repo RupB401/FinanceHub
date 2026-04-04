@@ -19,7 +19,14 @@ export const ROLES = {
 };
 
 export const FinancialDashboardProvider = ({ children }) => {
-  const [transactions, setTransactions] = useState(MOCK_TRANSACTIONS);
+  const [transactions, setTransactions] = useState(() => {
+    // Load transactions from localStorage or use mock data
+    const saved = localStorage.getItem('financialDashboard_transactions');
+    return saved ? JSON.parse(saved) : MOCK_TRANSACTIONS.map(t => ({
+      ...t,
+      date: new Date(t.date)
+    }));
+  });
   const [userRole, setUserRole] = useState(() => {
     // Load role from localStorage or default to viewer
     const saved = localStorage.getItem('userRole');
@@ -45,6 +52,15 @@ export const FinancialDashboardProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('userRole', userRole);
   }, [userRole]);
+
+  // Persist transactions to localStorage
+  useEffect(() => {
+    const transactionsToSave = transactions.map(t => ({
+      ...t,
+      date: t.date instanceof Date ? t.date.toISOString() : t.date
+    }));
+    localStorage.setItem('financialDashboard_transactions', JSON.stringify(transactionsToSave));
+  }, [transactions]);
 
   // Filter and sort transactions
   const filteredTransactions = React.useMemo(() => {

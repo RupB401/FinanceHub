@@ -19,7 +19,7 @@ import {
   AreaChart,
   Area,
 } from 'recharts';
-import { FaChartBar, FaChartLine, FaChartPie, FaTrendingUp } from 'react-icons/fa';
+import { FaChartBar, FaChartLine, FaChartPie, FaArrowUp } from 'react-icons/fa';
 
 const COLORS = [
   '#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6',
@@ -28,13 +28,13 @@ const COLORS = [
 
 function AnalyticsPage() {
   const { isDark } = useTheme();
-  const { transactions, summaryStats, spendingByCategory, balanceHistory } =
+  const { allTransactions, summaryStats, spendingByCategory, balanceHistory } =
     useFinancialDashboard();
 
   // Calculate monthly income vs expenses
   const monthlyData = React.useMemo(() => {
     const data = {};
-    transactions.forEach((t) => {
+    allTransactions.forEach((t) => {
       const date = new Date(t.date);
       const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
       
@@ -50,14 +50,14 @@ function AnalyticsPage() {
     });
 
     return Object.values(data).sort((a, b) => a.month.localeCompare(b.month)).slice(-6);
-  }, [transactions]);
+  }, [allTransactions]);
 
   // Calculate category comparison
   const categoryComparison = spendingByCategory.slice(0, 6);
 
   // Calculate daily average
-  const dailyAverage = transactions.length > 0
-    ? (transactions.reduce((sum, t) => sum + t.amount, 0) / transactions.length).toFixed(2)
+  const dailyAverage = allTransactions.length > 0
+    ? (allTransactions.reduce((sum, t) => sum + t.amount, 0) / allTransactions.length).toFixed(2)
     : 0;
 
   const chartContainerClass = `rounded-lg border-2 p-6 ${
@@ -124,7 +124,7 @@ function AnalyticsPage() {
                   Total Transactions
                 </p>
                 <p className={`text-2xl font-bold mt-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                  {transactions.length}
+                  {allTransactions.length}
                 </p>
               </div>
               <div className="text-3xl">📊</div>
@@ -306,7 +306,7 @@ function AnalyticsPage() {
         {/* Additional Insights */}
         <div className={chartContainerClass}>
           <h2 className={headingClass}>
-            <FaTrendingUp /> Key Insights
+            <FaArrowUp /> Key Insights
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className={`p-4 rounded-lg ${isDark ? 'bg-gray-700' : 'bg-gray-100'}`}>
@@ -314,7 +314,7 @@ function AnalyticsPage() {
                 Total Income
               </p>
               <p className={`text-2xl font-bold mt-2 text-green-500`}>
-                ${transactions
+                ${allTransactions
                   .filter((t) => t.type === 'income')
                   .reduce((sum, t) => sum + t.amount, 0)
                   .toFixed(2)}
@@ -326,7 +326,7 @@ function AnalyticsPage() {
                 Total Expenses
               </p>
               <p className={`text-2xl font-bold mt-2 text-red-500`}>
-                ${transactions
+                ${allTransactions
                   .filter((t) => t.type === 'expense')
                   .reduce((sum, t) => sum + t.amount, 0)
                   .toFixed(2)}
