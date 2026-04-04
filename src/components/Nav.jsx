@@ -5,9 +5,7 @@ import { useAuth } from "../contexts/AuthContext";
 import Theme from "./Theme";
 import { 
   FaChartLine, 
-  FaWallet, 
   FaChartPie, 
-  FaCog, 
   FaUser, 
   FaSignOutAlt,
   FaBars,
@@ -27,9 +25,7 @@ function Nav() {
 
   const navLinks = [
     { to: "/financial-dashboard", icon: FaChartLine, label: "Dashboard" },
-    { to: "/portfolio", icon: FaWallet, label: "Portfolio" },
     { to: "/analytics", icon: FaChartPie, label: "Analytics" },
-    { to: "/settings", icon: FaCog, label: "Settings" },
   ];
 
   return (
@@ -119,14 +115,6 @@ function Nav() {
               <Link to="/profile" className="gap-2">
                 <FaUser className="text-blue-500" />
                 <span>My Profile</span>
-              </Link>
-            </li>
-
-            {/* Settings Option */}
-            <li>
-              <Link to="/settings" className="gap-2">
-                <FaCog className="text-gray-500" />
-                <span>Settings</span>
               </Link>
             </li>
 

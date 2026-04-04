@@ -88,7 +88,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const from = location.state?.from?.pathname || "/explore";
+  const from = location.state?.from?.pathname || "/financial-dashboard";
 
   // Currency symbols animation effect
   useEffect(() => {
