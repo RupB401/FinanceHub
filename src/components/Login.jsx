@@ -14,7 +14,7 @@ const Login = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [otpSent, setOtpSent] = useState(false);
 
   // Currency symbols and animation logic from landing page
@@ -151,7 +151,7 @@ const Login = () => {
     e.preventDefault();
     setError("");
     setSuccess("");
-    setLoading(true);
+    setIsSubmitting(true);
 
     try {
       if (showForgotPassword) {
@@ -168,7 +168,7 @@ const Login = () => {
           // Reset password
           if (newPassword !== confirmPassword) {
             setError("Passwords do not match");
-            setLoading(false);
+            setIsSubmitting(false);
             return;
           }
           const result = resetPassword(email, otp, newPassword);
@@ -193,7 +193,7 @@ const Login = () => {
         // Signup
         if (password !== confirmPassword) {
           setError("Passwords do not match");
-          setLoading(false);
+          setIsSubmitting(false);
           return;
         }
         const result = signup(email, password, name);
@@ -206,7 +206,7 @@ const Login = () => {
     } catch (error) {
       setError("An unexpected error occurred");
     } finally {
-      setLoading(false);
+      setIsSubmitting(false);
     }
   };
 
@@ -461,7 +461,7 @@ const Login = () => {
 
             <button
               type="submit"
-              disabled={loading}
+              disabled={isSubmitting}
               className="w-full py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-lg hover:from-purple-600 hover:to-pink-600 focus:outline-none focus:ring-2 focus:ring-purple-300 transform hover:scale-[1.02] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading
