@@ -11,53 +11,17 @@ function Footer() {
           <div className="flex items-center mb-4">
             <img
               src={StockPlayLogo}
-              alt="StockPlay Logo"
+              alt="FinanceHub Logo"
               className="w-16 h-16 mr-3"
             />
             <div>
-              <h3 className="font-bold text-xl">StockPlay</h3>
-              <p className="text-sm opacity-80">Stock Investing Simulator</p>
+              <h3 className="font-bold text-xl">FinanceHub</h3>
+              <p className="text-sm opacity-80">Personal Finance Dashboard</p>
             </div>
           </div>
-          <p className="max-w-md text-sm opacity-90">
-            StockPlay is a comprehensive stock market simulator designed to help
-            users learn investing without risking real money. Practice trading,
-            analyze portfolios, and master market strategies in a safe
-            environment.
-          </p>
+        
         </aside>
 
-        <nav>
-          <h6 className="footer-title">Platform</h6>
-          <Link to="/dashboard" className="link link-hover">
-            Dashboard
-          </Link>
-          <Link to="/portfolio" className="link link-hover">
-            Portfolio
-          </Link>
-          <Link to="/trading" className="link link-hover">
-            Trading
-          </Link>
-          <Link to="/analytics" className="link link-hover">
-            Analytics
-          </Link>
-        </nav>
-
-        <nav>
-          <h6 className="footer-title">Resources</h6>
-          <Link to="/screener" className="link link-hover">
-            Stock Screener
-          </Link>
-          <Link to="/market-indices" className="link link-hover">
-            Market Indices
-          </Link>
-          <Link to="/etfs" className="link link-hover">
-            ETFs
-          </Link>
-          <Link to="/options" className="link link-hover">
-            Options
-          </Link>
-        </nav>
 
         <nav>
           <h6 className="footer-title">Connect with Developer</h6>
@@ -116,25 +80,12 @@ function Footer() {
       <div className="footer footer-center border-t border-base-300 px-10 py-4">
         <aside>
           <p className="text-sm opacity-80">
-            © {new Date().getFullYear()} StockPlay - Stock Investing Simulator.
+            © {new Date().getFullYear()} FinanceHub - Personal Finance Dashboard.
             Made by
             <span className="font-semibold ml-1">Rup Kumar Biswas</span>
           </p>
           <div className="divider my-2"></div>
-          <div className="text-xs opacity-70 max-w-4xl text-center">
-            <p className="mb-2">
-              <strong>Disclaimer:</strong> StockPlay is a virtual trading
-              simulator for educational purposes only. All trades are simulated
-              using virtual currency (QuantZ). This platform does not involve
-              real money or actual stock purchases. Market data may be delayed
-              and should not be used for real investment decisions.
-            </p>
-            <p>
-              Past performance does not guarantee future results. Always conduct
-              your own research and consult with financial advisors before
-              making actual investment decisions.
-            </p>
-          </div>
+          
         </aside>
       </div>
     </footer>

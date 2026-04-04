@@ -18,6 +18,7 @@ import LandingPage from "./components/LandingPage";
 import Footer from "./components/Footer";
 import TitleBar from "./components/TitleBar";
 import FinancialDashboard from "./components/FinancialDashboard";
+import AnalyticsPage from "./components/AnalyticsPage";
 import { FinancialDashboardProvider } from "./contexts/FinancialDashboardContext";
 
 // Create a client for React Query
@@ -60,6 +61,14 @@ function AppContent() {
               element={
                 <ProtectedRoute>
                   <FinancialDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/analytics"
+              element={
+                <ProtectedRoute>
+                  <AnalyticsPage />
                 </ProtectedRoute>
               }
             />

@@ -49,10 +49,10 @@ function Nav() {
         <Link className="btn btn-ghost text-sm sm:text-lg md:text-xl px-2 sm:px-4" to="/">
           <img
             src={StockPlayLogo}
-            alt="StockPlay Logo"
+            alt="FinanceHub Logo"
             className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12"
           />
-          <span className="hidden sm:inline font-bold">StockPlay</span>
+          <span className="hidden sm:inline font-bold">FinanceHub</span>
         </Link>
       </div>
 
@@ -76,8 +76,8 @@ function Nav() {
         </ul>
       </div>
 
-      {/* Right Side Controls */}
-      <div className="navbar-end flex items-center gap-2 sm:gap-4">
+      {/* Right Side Controls - Pushed to Extreme Right */}
+      <div className="navbar-end flex items-center gap-2 sm:gap-4 ml-auto">
         <Theme />
 
         {/* User Profile Dropdown */}
