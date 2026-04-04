@@ -251,6 +251,16 @@ export const FinancialDashboardProvider = ({ children }) => {
     return JSON.stringify(filteredTransactions, null, 2);
   };
 
+  // Clear all transactions (Admin only)
+  const clearAllTransactions = () => {
+    if (userRole !== ROLES.ADMIN) {
+      console.warn('Only admins can clear all transactions');
+      return false;
+    }
+    setTransactions([]);
+    return true;
+  };
+
   const value = {
     // Data
     transactions: filteredTransactions,
@@ -278,6 +288,7 @@ export const FinancialDashboardProvider = ({ children }) => {
     deleteTransaction,
     importTransactions,
     exportTransactions,
+    clearAllTransactions,
   };
 
   return (

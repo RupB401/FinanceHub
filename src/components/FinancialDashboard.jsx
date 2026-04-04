@@ -8,13 +8,19 @@ import InsightsSection from './FinancialDashboard/InsightsSection';
 import RoleSelector from './FinancialDashboard/RoleSelector';
 import ExportModal from './FinancialDashboard/ExportModal';
 import AddTransactionModal from './FinancialDashboard/AddTransactionModal';
-import { MdAdd, MdDownload } from 'react-icons/md';
+import { MdAdd, MdDownload, MdDelete } from 'react-icons/md';
 
 function FinancialDashboard() {
   const { isDark } = useTheme();
-  const { userRole, setUserRole, isAdmin, exportTransactions } = useFinancialDashboard();
+  const { userRole, setUserRole, isAdmin, exportTransactions, clearAllTransactions } = useFinancialDashboard();
   const [showExportModal, setShowExportModal] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
+
+  const handleClearAllData = () => {
+    if (window.confirm('Are you sure you want to delete ALL transactions? This action cannot be undone.')) {
+      clearAllTransactions();
+    }
+  };
 
   return (
     <div
@@ -65,6 +71,18 @@ function FinancialDashboard() {
                   }`}
                 >
                   <MdAdd /> Add Purchase
+                </button>
+              )}
+              {isAdmin && (
+                <button
+                  onClick={handleClearAllData}
+                  className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm sm:text-base w-full sm:w-auto flex items-center justify-center gap-2 ${
+                    isDark
+                      ? 'bg-red-600 hover:bg-red-700 text-white'
+                      : 'bg-red-500 hover:bg-red-600 text-white'
+                  }`}
+                >
+                  <MdDelete /> Clear All Data
                 </button>
               )}
             </div>
