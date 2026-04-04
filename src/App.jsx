@@ -9,6 +9,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { AuthProvider } from "./contexts/AuthContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
+import { CurrencyProvider } from "./contexts/CurrencyContext";
 import ErrorBoundary from "./components/ErrorBoundary";
 import ProtectedRoute from "./components/ProtectedRoute";
 import SessionManager from "./components/SessionManager";
@@ -86,13 +87,15 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <ThemeProvider>
-            <FinancialDashboardProvider>
-              <NotificationProvider>
-                <Router>
-                  <AppContent />
-                </Router>
-              </NotificationProvider>
-            </FinancialDashboardProvider>
+            <CurrencyProvider>
+              <FinancialDashboardProvider>
+                <NotificationProvider>
+                  <Router>
+                    <AppContent />
+                  </Router>
+                </NotificationProvider>
+              </FinancialDashboardProvider>
+            </CurrencyProvider>
           </ThemeProvider>
         </AuthProvider>
       </QueryClientProvider>

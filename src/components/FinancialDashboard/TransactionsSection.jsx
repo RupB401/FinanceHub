@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useFinancialDashboard } from '../../contexts/FinancialDashboardContext';
+import { useCurrency } from '../../contexts/CurrencyContext';
 import { TRANSACTION_CATEGORIES } from '../../data/mockFinancialData';
 import { useTheme } from '../../contexts/ThemeContext';
 import {
@@ -18,6 +19,7 @@ import {
 
 function TransactionsSection() {
   const { isDark } = useTheme();
+  const { formatCurrency } = useCurrency();
   const {
     transactions,
     filters,
@@ -317,7 +319,7 @@ function TransactionsSection() {
                             : 'text-red-600 dark:text-red-400'
                         }`}
                       >
-                        {transaction.type === 'income' ? '+' : '-'}${transaction.amount.toFixed(2)}
+                        {transaction.type === 'income' ? '+' : '-'}{formatCurrency(transaction.amount)}
                       </span>
 
                       {isAdmin && (

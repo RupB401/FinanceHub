@@ -2,6 +2,7 @@ import React from "react";
 import StockPlayLogo from "../Logo/StockPlayIcon-removebg-preview.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { useCurrency, CURRENCIES } from "../contexts/CurrencyContext";
 import Theme from "./Theme";
 import { 
   MdShowChart, 
@@ -9,13 +10,15 @@ import {
   MdPerson, 
   MdLogout,
   MdMenu,
-  MdClose
+  MdClose,
+  MdCurrencyExchange
 } from "react-icons/md";
 import { useState } from "react";
 
 function Nav() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const { currency, setCurrency } = useCurrency();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleLogout = async () => {
@@ -79,6 +82,52 @@ function Nav() {
       {/* Right Side Controls - Pushed to Extreme Right */}
       <div className="navbar-end flex items-center gap-2 sm:gap-4 ml-auto">
         <Theme />
+
+        {/* Currency Selector Dropdown */}
+        <div className="dropdown dropdown-end">
+          <button
+            tabIndex={0}
+            className="btn btn-ghost btn-sm md:btn-md text-lg hover:bg-primary/20 transition-colors"
+            title="Select Currency"
+          >
+            <MdCurrencyExchange />
+          </button>
+          <ul
+            tabIndex={0}
+            className="dropdown-content menu menu-sm bg-base-100 rounded-box z-[1] mt-3 w-56 p-2 shadow-lg max-h-80 overflow-y-auto"
+          >
+            <li className="menu-title px-4 py-2 pointer-events-none">
+              <span>Currency ({currency})</span>
+            </li>
+            <div className="divider my-1"></div>
+            {Object.values(CURRENCIES).map((curr) => (
+              <li key={curr.code}>
+                <button
+                  onClick={() => {
+                    setCurrency(curr.code);
+                    // Close dropdown
+                    if (document.querySelector('[tabIndex="0"]')) {
+                      document.querySelector('[tabIndex="0"]').blur();
+                    }
+                  }}
+                  className={`flex items-center gap-2 ${
+                    currency === curr.code
+                      ? "bg-primary text-white font-semibold"
+                      : ""
+                  }`}
+                >
+                  <span>{curr.flag}</span>
+                  <span className="flex-1 text-left">
+                    {curr.code} - {curr.name}
+                  </span>
+                  {currency === curr.code && (
+                    <span className="text-sm">✓</span>
+                  )}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
 
         {/* User Profile Dropdown */}
         <div className="dropdown dropdown-end">

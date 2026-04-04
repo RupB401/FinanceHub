@@ -16,6 +16,7 @@ import {
 } from 'recharts';
 import { useFinancialDashboard } from '../../contexts/FinancialDashboardContext';
 import { useTheme } from '../../contexts/ThemeContext';
+import { useCurrency } from '../../contexts/CurrencyContext';
 
 const COLORS = [
   '#3B82F6', // blue
@@ -32,6 +33,7 @@ const COLORS = [
 
 function BalanceTrendChart() {
   const { isDark } = useTheme();
+  const { formatCurrency } = useCurrency();
   const { balanceHistory } = useFinancialDashboard();
 
   return (
@@ -98,6 +100,7 @@ function BalanceTrendChart() {
 
 function SpendingByCategoryChart() {
   const { isDark } = useTheme();
+  const { formatCurrency } = useCurrency();
   const { spendingByCategory } = useFinancialDashboard();
 
   // Limit to top 8 categories for better visualization
@@ -210,7 +213,7 @@ function ExpenseBreakdownPieChart() {
                   borderRadius: '8px',
                   color: isDark ? '#E5E7EB' : '#1F2937',
                 }}
-                formatter={(value) => `$${value.toFixed(2)}`}
+                formatter={(value) => formatCurrency(value)}
               />
             </PieChart>
           </ResponsiveContainer>
@@ -224,7 +227,7 @@ function ExpenseBreakdownPieChart() {
                   style={{ backgroundColor: COLORS[index % COLORS.length] }}
                 ></div>
                 <span className={isDark ? 'text-gray-300' : 'text-gray-700'}>
-                  {entry.category}: ${entry.amount.toFixed(2)}
+                  {entry.category}: {formatCurrency(entry.amount)}
                 </span>
               </div>
             ))}

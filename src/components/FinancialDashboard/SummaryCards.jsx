@@ -1,9 +1,11 @@
 import React from 'react';
 import { useFinancialDashboard } from '../../contexts/FinancialDashboardContext';
 import { useTheme } from '../../contexts/ThemeContext';
+import { useCurrency } from '../../contexts/CurrencyContext';
 
 function SummaryCards() {
   const { isDark } = useTheme();
+  const { formatCurrency } = useCurrency();
   const { summaryStats } = useFinancialDashboard();
 
   const cards = [
@@ -69,10 +71,7 @@ function SummaryCards() {
                   card.value < 0 ? 'text-red-600 dark:text-red-400' : ''
                 }`}
               >
-                ${Math.abs(card.value).toLocaleString('en-US', {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })}
+                {formatCurrency(Math.abs(card.value))}
               </p>
               {card.value < 0 && !card.isBalance && (
                 <p className="text-xs mt-1 text-red-600 dark:text-red-400">

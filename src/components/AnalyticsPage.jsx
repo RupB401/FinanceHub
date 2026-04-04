@@ -1,6 +1,7 @@
 import React from 'react';
 import { useFinancialDashboard } from '../contexts/FinancialDashboardContext';
 import { useTheme } from '../contexts/ThemeContext';
+import { useCurrency } from '../contexts/CurrencyContext';
 import FinancialCharts from './FinancialDashboard/FinancialCharts';
 import {
   BarChart,
@@ -28,8 +29,14 @@ const COLORS = [
 
 function AnalyticsPage() {
   const { isDark } = useTheme();
+  const { formatCurrency, getCurrencySymbol } = useCurrency();
   const { allTransactions, summaryStats, spendingByCategory, balanceHistory } =
     useFinancialDashboard();
+
+  // Create formatter for chart tooltips
+  const formatChartValue = (value) => {
+    return formatCurrency(value);
+  };
 
   // Calculate monthly income vs expenses
   const monthlyData = React.useMemo(() => {
@@ -110,10 +117,10 @@ function AnalyticsPage() {
                   Total Balance
                 </p>
                 <p className={`text-2xl font-bold mt-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                  ${summaryStats.totalBalance?.toFixed(2) || '0.00'}
+                  {formatCurrency(summaryStats.totalBalance || 0)}
                 </p>
               </div>
-              <div className="text-3xl">💰</div>
+              <div className="text-3xl"></div>
             </div>
           </div>
 
@@ -127,7 +134,7 @@ function AnalyticsPage() {
                   {allTransactions.length}
                 </p>
               </div>
-              <div className="text-3xl">📊</div>
+              <div className="text-3xl"></div>
             </div>
           </div>
 
@@ -141,7 +148,7 @@ function AnalyticsPage() {
                   ${dailyAverage}
                 </p>
               </div>
-              <div className="text-3xl">📈</div>
+              <div className="text-3xl"></div>
             </div>
           </div>
 
@@ -155,7 +162,7 @@ function AnalyticsPage() {
                   {spendingByCategory[0]?.category || 'N/A'}
                 </p>
               </div>
-              <div className="text-3xl">🏆</div>
+              <div className="text-3xl"></div>
             </div>
           </div>
         </div>
@@ -165,7 +172,7 @@ function AnalyticsPage() {
           {/* Monthly Income vs Expenses */}
           <div className={chartContainerClass}>
             <h2 className={headingClass}>
-              <FaChartBar /> Monthly Overview
+              <MdBarChart /> Monthly Overview
             </h2>
             {monthlyData.length > 0 ? (
               <ResponsiveContainer width="100%" height={300}>
@@ -203,7 +210,7 @@ function AnalyticsPage() {
           {/* Balance Trend Area Chart */}
           <div className={chartContainerClass}>
             <h2 className={headingClass}>
-              <FaChartLine /> Balance Progression
+              <MdShowChart /> Balance Progression
             </h2>
             {balanceHistory.length > 0 ? (
               <ResponsiveContainer width="100%" height={300}>
@@ -251,7 +258,7 @@ function AnalyticsPage() {
           {/* Top Categories */}
           <div className={chartContainerClass}>
             <h2 className={headingClass}>
-              <FaChartPie /> Top Categories
+              <MdPieChart /> Top Categories
             </h2>
             {categoryComparison.length > 0 ? (
               <ResponsiveContainer width="100%" height={300}>
@@ -283,7 +290,7 @@ function AnalyticsPage() {
                       borderRadius: '8px',
                       color: isDark ? '#E5E7EB' : '#1F2937',
                     }}
-                    formatter={(value) => `$${value.toFixed(2)}`}
+                    formatter={formatChartValue}
                   />
                   <Bar dataKey="amount" fill="#8B5CF6" radius={[0, 8, 8, 0]}>
                     {categoryComparison.map((entry, index) => (
@@ -344,7 +351,7 @@ function AnalyticsPage() {
                     : 'text-red-500'
                 }`}
               >
-                ${(summaryStats.thisMonthNetIncome || 0).toFixed(2)}
+                {formatCurrency(summaryStats.thisMonthNetIncome || 0)}
               </p>
             </div>
           </div>
