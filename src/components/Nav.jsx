@@ -92,41 +92,40 @@ function Nav() {
           >
             <MdCurrencyExchange />
           </button>
-          <ul
+          <div
             tabIndex={0}
-            className="dropdown-content menu menu-sm bg-base-100 rounded-box z-[1] mt-3 w-56 p-2 shadow-lg max-h-80 overflow-y-auto"
+            className="dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-64 p-2 shadow-lg max-h-96 overflow-y-auto border border-base-300"
           >
-            <li className="menu-title px-4 py-2 pointer-events-none">
-              <span>Currency ({currency})</span>
-            </li>
-            <div className="divider my-1"></div>
+            <div className="px-4 py-2 font-semibold text-sm border-b border-base-300">
+              Currency ({currency})
+            </div>
             {Object.values(CURRENCIES).map((curr) => (
-              <li key={curr.code}>
-                <button
-                  onClick={() => {
-                    setCurrency(curr.code);
-                    // Close dropdown
-                    if (document.querySelector('[tabIndex="0"]')) {
-                      document.querySelector('[tabIndex="0"]').blur();
-                    }
-                  }}
-                  className={`flex items-center gap-2 ${
-                    currency === curr.code
-                      ? "bg-primary text-white font-semibold"
-                      : ""
-                  }`}
-                >
-                  <span>{curr.flag}</span>
-                  <span className="flex-1 text-left">
-                    {curr.code} - {curr.name}
-                  </span>
-                  {currency === curr.code && (
-                    <span className="text-sm">✓</span>
-                  )}
-                </button>
-              </li>
+              <button
+                key={curr.code}
+                onClick={() => {
+                  setCurrency(curr.code);
+                  // Close dropdown
+                  if (document.querySelector('[tabIndex="0"]')) {
+                    document.querySelector('[tabIndex="0"]').blur();
+                  }
+                }}
+                className={`w-full flex items-center gap-3 px-4 py-2 rounded-lg transition-all text-left ${
+                  currency === curr.code
+                    ? "bg-primary text-primary-content font-semibold"
+                    : "hover:bg-base-200 dark:hover:bg-gray-700"
+                }`}
+              >
+                <span className="text-xl">{curr.flag}</span>
+                <div className="flex-1 min-w-0">
+                  <div className="font-medium text-sm">{curr.code}</div>
+                  <div className="text-xs opacity-70">{curr.name}</div>
+                </div>
+                {currency === curr.code && (
+                  <span className="text-lg">✓</span>
+                )}
+              </button>
             ))}
-          </ul>
+          </div>
         </div>
 
         {/* User Profile Dropdown */}

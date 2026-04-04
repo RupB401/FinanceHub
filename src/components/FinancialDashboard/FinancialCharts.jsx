@@ -170,6 +170,7 @@ function SpendingByCategoryChart() {
 
 function ExpenseBreakdownPieChart() {
   const { isDark } = useTheme();
+  const { formatCurrency } = useCurrency();
   const { spendingByCategory } = useFinancialDashboard();
 
   return (
