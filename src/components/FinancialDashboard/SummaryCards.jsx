@@ -10,26 +10,26 @@ function SummaryCards() {
     {
       title: 'Total Balance',
       value: summaryStats.totalBalance,
-      icon: '💰',
+      icon: '$',
       color: 'blue',
       isBalance: true,
     },
     {
       title: 'This Month Income',
       value: summaryStats.thisMonthIncome,
-      icon: '📈',
+      icon: '↑',
       color: 'green',
     },
     {
       title: 'This Month Expenses',
       value: summaryStats.thisMonthExpense,
-      icon: '📉',
+      icon: '↓',
       color: 'red',
     },
     {
       title: 'Net Income',
       value: summaryStats.thisMonthNetIncome,
-      icon: '✅',
+      icon: '✓',
       color: summaryStats.thisMonthNetIncome >= 0 ? 'green' : 'red',
     },
   ];

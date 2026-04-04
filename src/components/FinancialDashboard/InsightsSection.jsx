@@ -86,23 +86,23 @@ function InsightsSection() {
             isDark ? 'text-white' : 'text-gray-900'
           }`}
         >
-          💰 Money Tips
+          Money Tips
         </h3>
         <ul className="space-y-2 text-sm">
           <li className={`flex gap-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-            <span>📌</span>
+            <span>•</span>
             <span>Track all expenses daily for accurate budgeting</span>
           </li>
           <li className={`flex gap-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-            <span>🎯</span>
+            <span>•</span>
             <span>Set category limits and monitor them closely</span>
           </li>
           <li className={`flex gap-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-            <span>📊</span>
+            <span>•</span>
             <span>Review trends monthly to identify savings opportunities</span>
           </li>
           <li className={`flex gap-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-            <span>💵</span>
+            <span>•</span>
             <span>Aim to save at least 20% of your monthly income</span>
           </li>
         </ul>

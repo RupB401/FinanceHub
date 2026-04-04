@@ -214,7 +214,7 @@ export const generateInsights = (transactions, spendingByCategory) => {
       type: 'highest_category',
       title: 'Top Spending Category',
       message: `Your highest spending is on ${spendingByCategory[0].category} with $${spendingByCategory[0].amount.toFixed(2)}`,
-      icon: '📊',
+      icon: '�',
       value: spendingByCategory[0].amount,
     });
   }
@@ -225,7 +225,7 @@ export const generateInsights = (transactions, spendingByCategory) => {
     type: 'monthly_trend',
     title: 'Monthly Spending Trend',
     message: `Your spending is ${monthlyChange > 0 ? 'up' : 'down'} by ${Math.abs(monthlyChange).toFixed(1)}% compared to last month`,
-    icon: monthlyChange > 0 ? '📈' : '📉',
+    icon: monthlyChange > 0 ? '↑' : '↓',
     value: monthlyChange,
   });
 
@@ -235,7 +235,7 @@ export const generateInsights = (transactions, spendingByCategory) => {
     type: 'income_ratio',
     title: 'Income to Expense Ratio',
     message: `For every $1 spent, you earn $${ratio}. Keep up the positive balance!`,
-    icon: '💰',
+    icon: '$',
     value: ratio,
   });
 

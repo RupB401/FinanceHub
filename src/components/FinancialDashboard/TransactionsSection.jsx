@@ -142,8 +142,8 @@ function TransactionsSection() {
               } focus:outline-none`}
             >
               <option value="">All Types</option>
-              <option value="income">💰 Income</option>
-              <option value="expense">💸 Expense</option>
+              <option value="income">Income</option>
+              <option value="expense">Expense</option>
             </select>
           </div>
 

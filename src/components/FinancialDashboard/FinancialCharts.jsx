@@ -47,7 +47,7 @@ function BalanceTrendChart() {
           isDark ? 'text-white' : 'text-gray-900'
         }`}
       >
-        📊 Balance Trend (Last 30 Days)
+        Balance Trend (Last 30 Days)
       </h2>
 
       {balanceHistory.length > 0 ? (
@@ -116,7 +116,7 @@ function SpendingByCategoryChart() {
           isDark ? 'text-white' : 'text-gray-900'
         }`}
       >
-        💸 Spending by Category
+        Spending by Category
       </h2>
 
       {topCategories.length > 0 ? (
@@ -182,7 +182,7 @@ function ExpenseBreakdownPieChart() {
           isDark ? 'text-white' : 'text-gray-900'
         }`}
       >
-        📊 Expense Breakdown
+        Expense Breakdown
       </h2>
 
       {spendingByCategory.length > 0 ? (
