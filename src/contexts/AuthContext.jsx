@@ -10,12 +10,37 @@ export const useAuth = () => {
   return context;
 };
 
-// Demo accounts for client-side authentication
-const DEMO_ACCOUNTS = [
+// Default demo accounts
+const DEFAULT_DEMO_ACCOUNTS = [
   { id: '1', email: 'admin@demo.com', password: 'admin123', name: 'Admin User' },
   { id: '2', email: 'user@demo.com', password: 'user123', name: 'Demo User' },
   { id: '3', email: 'test@demo.com', password: 'test123', name: 'Test User' },
 ];
+
+// Initialize demo accounts from localStorage or use defaults
+const initializeDemoAccounts = () => {
+  const saved = localStorage.getItem("demo_accounts");
+  if (saved) {
+    try {
+      return JSON.parse(saved);
+    } catch (error) {
+      console.error("Error loading saved demo accounts:", error);
+      return DEFAULT_DEMO_ACCOUNTS;
+    }
+  }
+  return DEFAULT_DEMO_ACCOUNTS;
+};
+
+let DEMO_ACCOUNTS = initializeDemoAccounts();
+
+// Function to save demo accounts to localStorage
+const saveDemoAccounts = () => {
+  try {
+    localStorage.setItem("demo_accounts", JSON.stringify(DEMO_ACCOUNTS));
+  } catch (error) {
+    console.error("Error saving demo accounts:", error);
+  }
+};
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -25,12 +50,24 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const initializeAuth = () => {
       try {
+        // Reload demo accounts in case they were updated elsewhere
+        DEMO_ACCOUNTS = initializeDemoAccounts();
+        
         const savedUser = localStorage.getItem("user_data");
         if (savedUser) {
-          setUser(JSON.parse(savedUser));
+          const userData = JSON.parse(savedUser);
+          // Verify the user's email still has a valid account
+          const accountExists = DEMO_ACCOUNTS.some(acc => acc.email === userData.email);
+          if (accountExists) {
+            setUser(userData);
+          } else {
+            // Account was deleted, clear auth
+            localStorage.removeItem("user_data");
+          }
         }
       } catch (error) {
         console.error("Error initializing auth:", error);
+        localStorage.removeItem("user_data");
       } finally {
         setLoading(false);
       }
@@ -99,6 +136,8 @@ export const AuthProvider = ({ children }) => {
         name,
       };
       DEMO_ACCOUNTS.push(newAccount);
+      // Persist the updated demo accounts
+      saveDemoAccounts();
 
       // Create user object
       const userData = {
@@ -159,8 +198,10 @@ export const AuthProvider = ({ children }) => {
       if (!account) {
         return { success: false, error: "Email not found" };
       }
-      // Demo: update password in demo accounts
+      // Update password in demo accounts
       account.password = newPassword;
+      // Persist the updated demo accounts
+      saveDemoAccounts();
       return { success: true, message: "Password reset successfully" };
     } catch (error) {
       console.error("Reset password error:", error);

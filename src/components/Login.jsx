@@ -84,11 +84,18 @@ const Login = () => {
     }));
   });
 
-  const { login, signup, forgotPassword, resetPassword } = useAuth();
+  const { login, signup, forgotPassword, resetPassword, user, loading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
   const from = location.state?.from?.pathname || "/financial-dashboard";
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (!loading && user) {
+      navigate(from, { replace: true });
+    }
+  }, [user, loading, navigate, from]);
 
   // Currency symbols animation effect
   useEffect(() => {
