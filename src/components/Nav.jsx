@@ -4,13 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import Theme from "./Theme";
 import { 
-  FaChartLine, 
-  FaChartPie, 
-  FaUser, 
-  FaSignOutAlt,
-  FaBars,
-  FaTimes
-} from "react-icons/fa";
+  MdShowChart, 
+  MdPieChart, 
+  MdPerson, 
+  MdLogout,
+  MdMenu,
+  MdClose
+} from "react-icons/md";
 import { useState } from "react";
 
 function Nav() {
@@ -24,8 +24,8 @@ function Nav() {
   };
 
   const navLinks = [
-    { to: "/financial-dashboard", icon: FaChartLine, label: "Dashboard" },
-    { to: "/analytics", icon: FaChartPie, label: "Analytics" },
+    { to: "/financial-dashboard", icon: MdShowChart, label: "Dashboard" },
+    { to: "/analytics", icon: MdPieChart, label: "Analytics" },
   ];
 
   return (
@@ -37,9 +37,9 @@ function Nav() {
           className="btn btn-ghost btn-circle"
         >
           {mobileMenuOpen ? (
-            <FaTimes className="text-xl" />
+            <MdClose className="text-xl" />
           ) : (
-            <FaBars className="text-xl" />
+            <MdMenu className="text-xl" />
           )}
         </button>
       </div>
@@ -113,7 +113,7 @@ function Nav() {
             {/* Profile Option */}
             <li>
               <Link to="/profile" className="gap-2">
-                <FaUser className="text-blue-500" />
+                <MdPerson className="text-blue-500" />
                 <span>My Profile</span>
               </Link>
             </li>
@@ -126,7 +126,7 @@ function Nav() {
                 onClick={handleLogout}
                 className="text-red-600 hover:text-red-700 hover:bg-red-50 gap-2"
               >
-                <FaSignOutAlt />
+                <MdLogout />
                 <span>Sign Out</span>
               </button>
             </li>

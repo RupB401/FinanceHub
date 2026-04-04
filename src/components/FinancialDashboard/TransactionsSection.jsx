@@ -3,18 +3,18 @@ import { useFinancialDashboard } from '../../contexts/FinancialDashboardContext'
 import { TRANSACTION_CATEGORIES } from '../../data/mockFinancialData';
 import { useTheme } from '../../contexts/ThemeContext';
 import {
-  FaSearch,
-  FaFilter,
-  FaSort,
-  FaEdit,
-  FaTrash,
-  FaSave,
-  FaTimes,
-  FaArrowUp,
-  FaArrowDown,
-  FaCalendarAlt,
-  FaTag,
-} from 'react-icons/fa';
+  MdSearch,
+  MdFilterList,
+  MdSort,
+  MdEdit,
+  MdDelete,
+  MdSave,
+  MdClose,
+  MdArrowUpward,
+  MdArrowDownward,
+  MdCalendarMonth,
+  MdLabel,
+} from 'react-icons/md';
 
 function TransactionsSection() {
   const { isDark } = useTheme();
@@ -115,7 +115,7 @@ function TransactionsSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
           {/* Search */}
           <div className="relative">
-            <FaSearch className="absolute left-3 top-3 text-gray-500" />
+            <MdSearch className="absolute left-3 top-3 text-gray-500" />
             <input
               type="text"
               placeholder="Search transactions..."
@@ -131,7 +131,7 @@ function TransactionsSection() {
 
           {/* Type Filter */}
           <div className="flex items-center gap-2">
-            <FaFilter className={`text-lg ${isDark ? 'text-gray-400' : 'text-gray-500'}`} />
+            <MdFilterList className={`text-lg ${isDark ? 'text-gray-400' : 'text-gray-500'}`} />
             <select
               value={filters.type}
               onChange={(e) => handleFilterChange('type', e.target.value)}
@@ -149,7 +149,7 @@ function TransactionsSection() {
 
           {/* Category Filter */}
           <div className="flex items-center gap-2">
-            <FaTag className={`text-lg ${isDark ? 'text-gray-400' : 'text-gray-500'}`} style={{ marginLeft: 0 }} />
+            <MdLabel className={`text-lg ${isDark ? 'text-gray-400' : 'text-gray-500'}`} style={{ marginLeft: 0 }} />
             <select
               value={filters.category}
               onChange={(e) => handleFilterChange('category', e.target.value)}
@@ -170,7 +170,7 @@ function TransactionsSection() {
 
           {/* Date Range Filter */}
           <div className="flex items-center gap-2">
-            <FaCalendarAlt className={`text-lg ${isDark ? 'text-gray-400' : 'text-gray-500'}`} />
+            <MdCalendarMonth className={`text-lg ${isDark ? 'text-gray-400' : 'text-gray-500'}`} />
             <select
               value={filters.dateRange}
               onChange={(e) => handleFilterChange('dateRange', e.target.value)}
@@ -189,7 +189,7 @@ function TransactionsSection() {
 
         {/* Sorting */}
         <div className="flex items-center gap-2">
-          <FaSort className={`text-lg ${isDark ? 'text-gray-400' : 'text-gray-500'}`} />
+          <MdSort className={`text-lg ${isDark ? 'text-gray-400' : 'text-gray-500'}`} />
           <label className={`text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
             Sort:
           </label>

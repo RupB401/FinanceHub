@@ -19,7 +19,7 @@ import {
   AreaChart,
   Area,
 } from 'recharts';
-import { FaChartBar, FaChartLine, FaChartPie, FaArrowUp } from 'react-icons/fa';
+import { MdBarChart, MdShowChart, MdPieChart, MdArrowUpward } from 'react-icons/md';
 
 const COLORS = [
   '#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6',
@@ -306,7 +306,7 @@ function AnalyticsPage() {
         {/* Additional Insights */}
         <div className={chartContainerClass}>
           <h2 className={headingClass}>
-            <FaArrowUp /> Key Insights
+            <MdArrowUpward /> Key Insights
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className={`p-4 rounded-lg ${isDark ? 'bg-gray-700' : 'bg-gray-100'}`}>

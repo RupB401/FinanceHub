@@ -8,7 +8,7 @@ import InsightsSection from './FinancialDashboard/InsightsSection';
 import RoleSelector from './FinancialDashboard/RoleSelector';
 import ExportModal from './FinancialDashboard/ExportModal';
 import AddTransactionModal from './FinancialDashboard/AddTransactionModal';
-import { FaPlus, FaDownload } from 'react-icons/fa';
+import { MdAdd, MdDownload } from 'react-icons/md';
 
 function FinancialDashboard() {
   const { isDark } = useTheme();
@@ -53,7 +53,7 @@ function FinancialDashboard() {
                     : 'bg-blue-500 hover:bg-blue-600 text-white'
                 }`}
               >
-                <FaDownload /> Export Data
+                <MdDownload /> Export Data
               </button>
               {isAdmin && (
                 <button
@@ -64,7 +64,7 @@ function FinancialDashboard() {
                       : 'bg-green-500 hover:bg-green-600 text-white'
                   }`}
                 >
-                  <FaPlus /> Add Purchase
+                  <MdAdd /> Add Purchase
                 </button>
               )}
             </div>

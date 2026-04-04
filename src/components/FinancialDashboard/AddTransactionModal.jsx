@@ -3,14 +3,14 @@ import { useFinancialDashboard } from '../../contexts/FinancialDashboardContext'
 import { useTheme } from '../../contexts/ThemeContext';
 import { TRANSACTION_CATEGORIES, TRANSACTION_TYPES } from '../../data/mockFinancialData';
 import {
-  FaTimes,
-  FaPlus,
-  FaDollarSign,
-  FaTag,
-  FaCalendar,
-  FaList,
-  FaExchangeAlt,
-} from 'react-icons/fa';
+  MdClose,
+  MdAdd,
+  MdAttachMoney,
+  MdLabel,
+  MdCalendarToday,
+  MdList,
+  MdCompareArrows,
+} from 'react-icons/md';
 
 function AddTransactionModal({ onClose }) {
   const { isDark } = useTheme();
@@ -112,7 +112,7 @@ function AddTransactionModal({ onClose }) {
           }`}
         >
           <h2 className={`text-xl font-bold flex items-center gap-2 ${isDark ? 'text-white' : ''}`}>
-            <FaPlus className="text-green-500" />
+            <MdAdd className="text-green-500" />
             Add Transaction
           </h2>
           <button
@@ -123,7 +123,7 @@ function AddTransactionModal({ onClose }) {
                 : 'hover:bg-gray-100 text-gray-600'
             }`}
           >
-            <FaTimes size={20} />
+            <MdClose size={20} />
           </button>
         </div>
 
@@ -146,7 +146,7 @@ function AddTransactionModal({ onClose }) {
           {/* Description */}
           <div>
             <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : ''}`}>
-              <FaTag className="inline mr-2" />
+              <MdLabel className="inline mr-2" />
               Description
             </label>
             <input
@@ -166,7 +166,7 @@ function AddTransactionModal({ onClose }) {
           {/* Amount */}
           <div>
             <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : ''}`}>
-              <FaDollarSign className="inline mr-2" />
+              <MdAttachMoney className="inline mr-2" />
               Amount
             </label>
             <input
@@ -188,7 +188,7 @@ function AddTransactionModal({ onClose }) {
           {/* Type */}
           <div>
             <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : ''}`}>
-              <FaExchangeAlt className="inline mr-2" />
+              <MdCompareArrows className="inline mr-2" />
               Type
             </label>
             <select
@@ -209,7 +209,7 @@ function AddTransactionModal({ onClose }) {
           {/* Category */}
           <div>
             <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : ''}`}>
-              <FaList className="inline mr-2" />
+              <MdList className="inline mr-2" />
               Category
             </label>
             <select
@@ -233,7 +233,7 @@ function AddTransactionModal({ onClose }) {
           {/* Date */}
           <div>
             <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-gray-300' : ''}`}>
-              <FaCalendar className="inline mr-2" />
+              <MdCalendarToday className="inline mr-2" />
               Date
             </label>
             <input
@@ -267,7 +267,7 @@ function AddTransactionModal({ onClose }) {
               disabled={loading}
               className="flex-1 px-4 py-2 rounded-lg font-medium bg-green-500 hover:bg-green-600 text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
-              <FaPlus />
+              <MdAdd />
               {loading ? 'Adding...' : 'Add Transaction'}
             </button>
           </div>
