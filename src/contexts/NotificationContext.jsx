@@ -29,10 +29,10 @@ export const NotificationProvider = ({ children }) => {
 
   // Load notifications from localStorage on mount
   useEffect(() => {
-    const savedNotifications = localStorage.getItem("stockplay_notifications");
-    const savedAlerts = localStorage.getItem("stockplay_price_alerts");
+    const savedNotifications = localStorage.getItem("financehub_notifications");
+    const savedAlerts = localStorage.getItem("financehub_price_alerts");
     const savedSettings = localStorage.getItem(
-      "stockplay_notification_settings"
+      "financehub_notification_settings"
     );
 
     if (savedNotifications) {
@@ -53,19 +53,19 @@ export const NotificationProvider = ({ children }) => {
   // Save to localStorage whenever notifications change
   useEffect(() => {
     localStorage.setItem(
-      "stockplay_notifications",
+      "financehub_notifications",
       JSON.stringify(notifications)
     );
     setUnreadCount(notifications.filter((n) => !n.read).length);
   }, [notifications]);
 
   useEffect(() => {
-    localStorage.setItem("stockplay_price_alerts", JSON.stringify(priceAlerts));
+    localStorage.setItem("financehub_price_alerts", JSON.stringify(priceAlerts));
   }, [priceAlerts]);
 
   useEffect(() => {
     localStorage.setItem(
-      "stockplay_notification_settings",
+      "financehub_notification_settings",
       JSON.stringify(settings)
     );
   }, [settings]);
@@ -87,7 +87,7 @@ export const NotificationProvider = ({ children }) => {
 
     // Show browser notification if permission granted
     if (Notification.permission === "granted") {
-      new Notification(`StockPlay - ${notification.title}`, {
+      new Notification(`FinanceHub - ${notification.title}`, {
         body: notification.message,
         icon: "/favicon.ico",
       });

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import StockPlayLogo from "../Logo/StockPlayIcon-removebg-preview.png";
+import FinanceHubLogo from "../Logo/StockPlayIcon-removebg-preview.png";
 
 function Footer() {
   return (
@@ -10,7 +10,7 @@ function Footer() {
         <aside>
           <div className="flex items-center mb-4">
             <img
-              src={StockPlayLogo}
+              src={FinanceHubLogo}
               alt="FinanceHub Logo"
               className="w-16 h-16 mr-3"
             />

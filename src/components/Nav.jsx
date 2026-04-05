@@ -1,5 +1,5 @@
 import React from "react";
-import StockPlayLogo from "../Logo/StockPlayIcon-removebg-preview.png";
+import FinanceHubLogo from "../Logo/StockPlayIcon-removebg-preview.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { useCurrency, CURRENCIES } from "../contexts/CurrencyContext";
@@ -51,7 +51,7 @@ function Nav() {
       <div className="flex-shrink-0">
         <Link className="btn btn-ghost text-sm sm:text-lg md:text-xl px-2 sm:px-4" to="/">
           <img
-            src={StockPlayLogo}
+            src={FinanceHubLogo}
             alt="FinanceHub Logo"
             className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12"
           />

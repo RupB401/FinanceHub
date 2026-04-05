@@ -310,7 +310,7 @@ const Login = () => {
                 ? "Reset Password"
                 : isLogin
                 ? "Welcome Back"
-                : "Join StockPlay"}
+                : "Join FinanceHub"}
             </h1>
             <p className="text-white/70">
               {showForgotPassword
